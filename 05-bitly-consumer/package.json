@@ -1,14 +1,15 @@
 {
-  "name": "shortener-shaharsol",
-  "version": "2.0.0",
-  "description": "",
-  "main": "shortener.js",
+  "name": "05-bitly-consumer",
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "description": "",
   "dependencies": {
+    "shortener-shaharsol": "~2.0.0"
   }
 }
