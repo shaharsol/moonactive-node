@@ -1,8 +1,12 @@
-const allowedChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+const codeGenerator = (length) => {
+    const allowedChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
 
-let result = ''
-for(let i = 0; i < 7; i++) {
-    result += allowedChars[Math.floor(Math.random() * allowedChars.length)]
+    let result = ''
+    for(let i = 0; i < length; i++) {
+        result += allowedChars[Math.floor(Math.random() * allowedChars.length)]
+    }
+    
+    return result
 }
 
-console.log(result)
+module.exports = codeGenerator
