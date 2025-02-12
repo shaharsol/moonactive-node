@@ -1,4 +1,6 @@
 const fileSystem = require('fs')
+const { promisify } = require('util')
+const fileSystemPromise = require('fs').promises
 
 // const readFilePromise = (path, encoding) => {
 //     return new Promise((resolve, reject) => {
@@ -12,10 +14,21 @@ const fileSystem = require('fs')
 //     })
 // }
 
-const promisify = (func) => {}
+const promisify = (func) => {
+    return (...args) => {
+        return new Promise((resolve, reject) => {
+            func(...args, (err, data) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(data)
+                }
+            })
+        })
+    }
+}
 
-
-const readFilePromise = promisify(fileSystem.readFile)
+const readFilePromise = promisify(fileSystem.readFile);
 
 // IIFE - imediately invoked function execution
 (async () => {
