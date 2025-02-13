@@ -1,5 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express'
 import config from 'config'
+import userRouter from './routers/users'
+import path from 'path'
 
 // for config, there are two popular npm solutions
 // dotenv
@@ -10,6 +12,9 @@ const appName = config.get<string>('app.name')
 
 const server = express()
 
-server.listen(port, () => console.log(`${appName} started on port ${port}...`))
+server.set('view engine', 'ejs')
+server.set('views', path.resolve(__dirname, 'views'))
 
-console.log(config.get<string>('app.awsPassword'))
+server.use('/users', userRouter)
+
+server.listen(port, () => console.log(`${appName} started on port ${port}...`))
