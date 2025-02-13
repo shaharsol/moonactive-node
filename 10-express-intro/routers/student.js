@@ -37,8 +37,8 @@ const sendWelcomeEmail = (req, res, next) => {
 const router = Router()
 
 router.use(connectToMysql)
-router.get(getStudent)
-router.post(sendWelcomeEmail)
-router.post(addStudent)
+router.get('/', getStudent)
+router.post('/', sendWelcomeEmail)
+router.post('/', addStudent)
 
 module.exports = router
