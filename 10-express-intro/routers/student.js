@@ -42,3 +42,4 @@ router.post('/', sendWelcomeEmail)
 router.post('/', addStudent)
 
 module.exports = router
+
