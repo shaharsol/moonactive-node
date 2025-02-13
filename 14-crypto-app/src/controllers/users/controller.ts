@@ -5,6 +5,6 @@ export function dashboard(req: Request, res: Response, next: NextFunction) {
 }
 
 export function addSymbol(req: Request, res: Response, next: NextFunction) {
-    const symbol = 'BTC'
+    const { symbol } = req.body
     res.send(`adding symbol ${symbol}...`)
 }
