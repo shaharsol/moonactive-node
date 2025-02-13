@@ -1,3 +1,4 @@
+const e = require('express')
 const { createServer } = require('http')
 
 const student = {
@@ -14,8 +15,10 @@ Meron,Gym,66
 `
 
 const requestHandler = (req, res) => {
+    console.log(`a ${req.method} request for ${req.url} occured`)
     switch (req.url) {
         case '/student': 
+            console.log('connecting to mysql...')
             switch (req.method) {
                 case 'GET':
                     res.setHeader('Content-type', 'application/json')
@@ -30,6 +33,7 @@ const requestHandler = (req, res) => {
             }
             break;
         case '/grades':
+            console.log('connecting to redis...')
             switch (req.method) {
                 case 'GET':
                     res.setHeader('Content-type', 'text/csv')
