@@ -4,8 +4,18 @@ import Draft from "./draft";
 import DTO from "./dto";
 import Model from "./model";
 import { ResultSetHeader } from "mysql2";
+import DistinctSymbol from "./distinct-symbol";
 
 class Mysql implements Model {
+    async getDistinctSymbols(): Promise<DistinctSymbol[]> {
+        const result = await pool.query<DistinctSymbol[]>(`
+            SELECT distinct symbol from user_symbols 
+        `)
+
+        return result[0]
+        
+    }
+
     async getPerUser(id: string): Promise<DTO[]> {
         const result = await pool.query<DTO[]>(`
             SELECT * from user_symbols 
