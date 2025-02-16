@@ -2,6 +2,9 @@ import express, { NextFunction, Request, Response } from 'express'
 import config from 'config'
 import userRouter from './routers/users'
 import path from 'path'
+import errorLogger from './middlewares/error/error-logger'
+import errorResponder from './middlewares/error/error-responder'
+import notFound from './middlewares/not-found'
 
 // for config, there are two popular npm solutions
 // dotenv
@@ -15,6 +18,14 @@ const server = express()
 server.set('view engine', 'ejs')
 server.set('views', path.resolve(__dirname, 'views'))
 
+// routing
 server.use('/users', userRouter)
+
+// special 404 middleware
+server.use(notFound)
+
+// error middlewares
+server.use(errorLogger)
+server.use(errorResponder)
 
 server.listen(port, () => console.log(`${appName} started on port ${port}...`))
