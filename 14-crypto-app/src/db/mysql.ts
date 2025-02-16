@@ -3,4 +3,4 @@ import config from 'config'
 
 const pool = createPool(config.get('mysql'))
 
-export default pool.query
+export default pool
