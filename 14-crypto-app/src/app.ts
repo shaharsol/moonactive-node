@@ -8,6 +8,7 @@ import notFound from './middlewares/not-found'
 import githubRouter from './routers/github'
 import githubAuth from './middlewares/github-auth'
 import session from 'express-session'
+import guestsRouter from './routers/guests'
 
 // for config, there are two popular npm solutions
 // dotenv
@@ -38,6 +39,7 @@ server.use(githubAuth.session())
 // routing
 server.use('/users', userRouter)
 server.use('/github', githubRouter)
+server.use('/guests', guestsRouter)
 
 // special 404 middleware
 server.use(notFound)
