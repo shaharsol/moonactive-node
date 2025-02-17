@@ -16,7 +16,11 @@ export async function dashboard(req: Request, res: Response, next: NextFunction)
             value: result[index][0] ? JSON.parse(result[index][0]).value : 0
         }))
 
-        res.render('users/dashboard', { userSymbols, symbolValues })
+        res.render('users/dashboard', { 
+            userSymbols, 
+            symbolValues,
+            ioServer: config.get<string>('app.io.url'),
+        })
     } catch (e) {
         next(e)
     }

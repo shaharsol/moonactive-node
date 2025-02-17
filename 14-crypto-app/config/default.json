@@ -2,10 +2,16 @@
     "app": {
         "port": 3000,
         "name": "CryptoDashboard",
-        "awsPassword": ""
+        "awsPassword": "",
+        "io": {
+            "url": "ws://localhost:3003"
+        }
     },
     "worker": {
         "interval": 10000
+    },
+    "io": {
+        "port": 3003
     },
     "mysql": {
         "host": "127.0.0.1",

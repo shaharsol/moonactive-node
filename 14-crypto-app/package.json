@@ -6,6 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec ts-node src/app.ts",
     "worker": "nodemon --exec ts-node src/worker.ts",
+    "io": "nodemon --exec ts-node src/io.ts",
     "qa": "NODE_ENV=qa nodemon --exec ts-node src/app.ts",
     "start": "NODE_ENV=production nodemon --exec ts-node src/app.ts"
   },
@@ -22,6 +23,7 @@
     "ioredis": "^5.5.0",
     "joi": "^17.13.3",
     "mysql2": "^3.12.0",
+    "socket.io": "^4.8.1",
     "uuid": "^11.0.5"
   },
   "devDependencies": {
@@ -33,6 +35,7 @@
     "@types/ioredis": "^4.28.10",
     "@types/joi": "^17.2.2",
     "@types/node": "^22.13.2",
+    "@types/socket.io": "^3.0.1",
     "@types/uuid": "^10.0.0",
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2"
