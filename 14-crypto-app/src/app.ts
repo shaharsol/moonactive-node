@@ -30,16 +30,19 @@ server.set('views', path.resolve(__dirname, 'views'))
 server.use(session({
     secret: config.get<string>('app.cookieSecret'),
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
 }))
 server.use(githubAuth.initialize())
 server.use(githubAuth.session())
 
 // routing
-server.use('/users', userRouter)
-server.use('/github', githubRouter)
 server.use('/guests', guestsRouter)
+server.use('/github', githubRouter)
+
+server.use('/users', userRouter)
 
 // special 404 middleware
 server.use(notFound)
