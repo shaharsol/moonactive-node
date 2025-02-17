@@ -10,12 +10,15 @@ const io = new Server({
 io.on('connection', (socket) => {
     console.log('new connection...')
 
-    socket.emit('welcome', {
-        when: new Date()
-    })
+    // socket.emit('welcome', {
+    //     when: new Date()
+    // })
 
-    io.emit('new-user', {
-        when: new Date()
+    // io.emit('new-user', {
+    //     when: new Date()
+    // })
+    socket.on('update-from-worker', (payload) => {
+        io.emit('new-symbol-value', payload)
     })
     
     socket.on('disconnect', () => {
