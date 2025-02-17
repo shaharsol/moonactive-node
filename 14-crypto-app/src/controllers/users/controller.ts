@@ -6,7 +6,7 @@ import SocketMessages from "../../enums/socket-messages";
 
 export async function dashboard(req: Request, res: Response, next: NextFunction) {
     try {
-        const userId = '09ac3c91-eeab-4388-b8e9-ecbaf3d96466'
+        const userId = req.user!.id
         const userSymbols = await getModel().getPerUser(userId)
 
         const symbolKeyTemplate = config.get<string>('redis.symbolKeyTemplate')
@@ -31,13 +31,16 @@ export async function dashboard(req: Request, res: Response, next: NextFunction)
 export async function addSymbol(req: Request, res: Response, next: NextFunction) {
     try {
         const { symbol } = req.body
-        const userId = '09ac3c91-eeab-4388-b8e9-ecbaf3d96466'
-        
-    
+        const userId = req.user!.id
+
         await getModel().add({ symbol, userId })
     
         res.redirect('/users/dashboard')
     } catch (e) {
         next(e)
     }
+}
+
+export function logout(req: Request, res: Response, next: NextFunction) {
+    req.logout((err) => res.redirect('/guests/welcome'))
 }

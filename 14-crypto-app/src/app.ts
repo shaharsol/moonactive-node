@@ -9,6 +9,7 @@ import githubRouter from './routers/github'
 import githubAuth from './middlewares/github-auth'
 import session from 'express-session'
 import guestsRouter from './routers/guests'
+import redis from './db/redis'
 
 // for config, there are two popular npm solutions
 // dotenv
@@ -33,8 +34,9 @@ server.use(session({
     saveUninitialized: false,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7
-    }
+    },
 }))
+
 server.use(githubAuth.initialize())
 server.use(githubAuth.session())
 

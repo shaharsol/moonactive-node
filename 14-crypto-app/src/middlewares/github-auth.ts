@@ -3,6 +3,15 @@ import { Profile, Strategy } from 'passport-github2'
 import config from 'config'
 import getModel from "../models/users/factory";
 
+declare global {
+    namespace Express {
+        interface User {
+            id: string;
+        }
+    }
+}
+
+
 passport.serializeUser((user, done) => {
     done(null, user);
 })
