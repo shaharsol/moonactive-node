@@ -10,14 +10,16 @@ import githubAuth from './middlewares/github-auth'
 import session from 'express-session'
 import guestsRouter from './routers/guests'
 import redis from './db/redis'
-
+import { RedisStore } from "connect-redis"
 // for config, there are two popular npm solutions
 // dotenv
 // node_config - we will use node_config
 // const PORT = process.env.APP_PORT || 3000
 const port = config.get<number>('app.port') 
 const appName = config.get<string>('app.name')
-
+const store = new RedisStore({
+    client: redis,
+})
 const server = express()
 
 server.set('view engine', 'ejs')
@@ -30,6 +32,7 @@ server.set('views', path.resolve(__dirname, 'views'))
 // 3. specific auth middleware session
 server.use(session({
     secret: config.get<string>('app.cookieSecret'),
+    store,
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -43,7 +46,6 @@ server.use(githubAuth.session())
 // routing
 server.use('/guests', guestsRouter)
 server.use('/github', githubRouter)
-
 server.use('/users', userRouter)
 
 // special 404 middleware
