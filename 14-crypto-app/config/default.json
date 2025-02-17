@@ -8,7 +8,10 @@
         }
     },
     "worker": {
-        "interval": 10000
+        "interval": 2000,
+        "io": {
+            "url": "ws://localhost:3003"
+        }
     },
     "io": {
         "port": 3003

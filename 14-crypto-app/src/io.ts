@@ -18,6 +18,7 @@ io.on('connection', (socket) => {
     //     when: new Date()
     // })
     socket.on('update-from-worker', (payload) => {
+        console.log(`got update-from-worker, ${payload.symbol} is now ${payload.value}`)
         io.emit('new-symbol-value', payload)
     })
     

@@ -8,13 +8,11 @@
     <script>
         const socket = io('<%=ioServer%>')
 
-        socket.on('welcome', () => {
-            console.log('got welcome message from the io server')
+        socket.on('new-symbol-value', (payload) => {
+            console.log(`new-symbol-value for ${payload.symbol}: ${payload.value}`)
+            document.getElementById(`symbol-value-${payload.symbol}`).innerHTML = payload.value
         })
 
-        socket.on('new-user', () => {
-            console.log('new user joined the server')
-        })
     </script>
 </head>
 <body>
@@ -30,7 +28,7 @@
                 <td style="border: 1px dashed blue;">
                     <%=userSymbol.symbol%>
                 </td>
-                <td style="border: 1px dashed blue;">
+                <td style="border: 1px dashed blue;" id="symbol-value-<%=userSymbol.symbol%>">
                     <%= symbolValues.find(symbolValue => symbolValue.symbol === userSymbol.symbol)?.value %>
                 </td>
             </tr>

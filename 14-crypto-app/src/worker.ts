@@ -1,9 +1,11 @@
-import config from 'config'
-import getModel from './models/user-symbols/factory'
-import axios from 'axios'
+import axios from 'axios';
 import * as cheerio from 'cheerio';
+import config from 'config';
 import redis from './db/redis';
-import { EmitHint } from 'typescript';
+import getModel from './models/user-symbols/factory';
+import io from 'socket.io-client';
+
+const socket = io(config.get<string>('worker.io.url'))
 
 function sleep(timeout: number) {
     return new Promise((resolve) => {
@@ -23,6 +25,10 @@ async function scrapeSymbol(symbol: string) {
         }
         await redis.lpush(`${config.get<string>('redis.symbolKeyTemplate')}:${symbol}`, JSON.stringify(data))
         console.log(`pushed to redis the value ${value} for ${symbol}`)
+        socket.emit('update-from-worker', {
+            symbol,
+            value
+        })
     }
 }
 
