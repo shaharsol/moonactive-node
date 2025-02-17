@@ -32,6 +32,7 @@ export async function addSymbol(req: Request, res: Response, next: NextFunction)
     try {
         const { symbol } = req.body
         const userId = '09ac3c91-eeab-4388-b8e9-ecbaf3d96466'
+        
     
         await getModel().add({ symbol, userId })
     

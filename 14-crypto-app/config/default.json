@@ -3,6 +3,7 @@
         "port": 3000,
         "name": "CryptoDashboard",
         "awsPassword": "",
+        "cookieSecret": "MyCookieSecret",
         "io": {
             "url": "ws://localhost:3003"
         }
@@ -25,5 +26,10 @@
     },
     "redis": {
         "symbolKeyTemplate": "company:cryptoapp:symbols"
+    },
+    "github": {
+        "clientID" : "Ov23livKNI40aXQhGKYl",
+        "clientSecret": "8650e7bd65319766698f3b377bcd5b7421b2d5e1",
+        "callbackURL": "http://localhost:3000/github/callback"
     }
 }
