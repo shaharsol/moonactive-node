@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import getModel from "../../models/user-symbols/factory";
 import redis from "../../db/redis";
 import config from 'config'
+import SocketMessages from "../../enums/socket-messages";
 
 export async function dashboard(req: Request, res: Response, next: NextFunction) {
     try {
@@ -20,6 +21,7 @@ export async function dashboard(req: Request, res: Response, next: NextFunction)
             userSymbols, 
             symbolValues,
             ioServer: config.get<string>('app.io.url'),
+            newSymbolValueMessageCode: SocketMessages.NewSymbolValue
         })
     } catch (e) {
         next(e)

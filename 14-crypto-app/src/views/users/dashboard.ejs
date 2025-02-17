@@ -8,7 +8,7 @@
     <script>
         const socket = io('<%=ioServer%>')
 
-        socket.on('new-symbol-value', (payload) => {
+        socket.on('<%= newSymbolValueMessageCode %>', (payload) => {
             console.log(`new-symbol-value for ${payload.symbol}: ${payload.value}`)
             document.getElementById(`symbol-value-${payload.symbol}`).innerHTML = payload.value
         })

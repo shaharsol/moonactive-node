@@ -1,5 +1,6 @@
 import { Server } from "socket.io";
 import config from 'config'
+import SocketMessages from "./enums/socket-messages";
 
 const io = new Server({
     cors: {
@@ -17,9 +18,9 @@ io.on('connection', (socket) => {
     // io.emit('new-user', {
     //     when: new Date()
     // })
-    socket.on('update-from-worker', (payload) => {
+    socket.on(SocketMessages.UpdateFromWorker, (payload) => {
         console.log(`got update-from-worker, ${payload.symbol} is now ${payload.value}`)
-        io.emit('new-symbol-value', payload)
+        io.emit(SocketMessages.NewSymbolValue, payload)
     })
     
     socket.on('disconnect', () => {

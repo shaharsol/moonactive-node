@@ -4,6 +4,7 @@ import config from 'config';
 import redis from './db/redis';
 import getModel from './models/user-symbols/factory';
 import io from 'socket.io-client';
+import SocketMessages from './enums/socket-messages';
 
 const socket = io(config.get<string>('worker.io.url'))
 
@@ -25,7 +26,7 @@ async function scrapeSymbol(symbol: string) {
         }
         await redis.lpush(`${config.get<string>('redis.symbolKeyTemplate')}:${symbol}`, JSON.stringify(data))
         console.log(`pushed to redis the value ${value} for ${symbol}`)
-        socket.emit('update-from-worker', {
+        socket.emit(SocketMessages.UpdateFromWorker, {
             symbol,
             value
         })
