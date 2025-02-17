@@ -11,7 +11,7 @@ passport.deserializeUser((user: Express.User, done) => {
     done(null, user);
 })
 
-passport.use(new Strategy(config.get('github'),
+passport.use(new Strategy({...config.get('github')},
     async function(accessToken: string, refreshToken: string, profile: Profile, done: Function) {
         try {
             // check if user exists in the database (login)
