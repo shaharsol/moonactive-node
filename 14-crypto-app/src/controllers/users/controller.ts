@@ -13,7 +13,7 @@ export async function dashboard(req: Request, res: Response, next: NextFunction)
         const result = await Promise.all(userSymbols.map(userSymbol => redis.lrange(`${symbolKeyTemplate}:${userSymbol.symbol}`, 0, 0)))
         const symbolValues = userSymbols.map((userSymbol, index) => ({
             symbol: userSymbol.symbol,
-            value: result[index][0].split('::')[0]
+            value: result[index][0] ? JSON.parse(result[index][0]).value : 0
         }))
 
         res.render('users/dashboard', { userSymbols, symbolValues })

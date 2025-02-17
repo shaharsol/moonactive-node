@@ -19,7 +19,7 @@
                     <%=userSymbol.symbol%>
                 </td>
                 <td style="border: 1px dashed blue;">
-
+                    <%= symbolValues.find(symbolValue => symbolValue.symbol === userSymbol.symbol)?.value %>
                 </td>
             </tr>
 
