@@ -2,9 +2,8 @@ import axios from 'axios';
 import * as cheerio from 'cheerio';
 import config from 'config';
 import redis from './db/redis';
-import getModel from './models/user-symbols/factory';
 import io from 'socket.io-client';
-import SocketMessages from './enums/socket-messages';
+import SocketMessages from 'socket-messages-moon-shaharsol';
 
 const socket = io(config.get<string>('worker.io.url'))
 
@@ -35,7 +34,11 @@ async function scrapeSymbol(symbol: string) {
 
 async function work() {
     try {
-        const symbolsToScrape = await getModel().getDistinctSymbols()
+        // in a monolith architecture, we could have directly acccess the database:
+        // const symbolsToScrape = await getModel().getDistinctSymbols()
+        // now, in a microservice architecture, we need to use API:
+        const response = await axios.get<{symbol: string}[]>(`${config.get<string>('worker.app.url')}/api/distinct-symbols`)
+        const symbolsToScrape = response.data
         await Promise.allSettled(symbolsToScrape.map(symbolToScrape => scrapeSymbol(symbolToScrape.symbol)))
         await sleep(config.get<number>('worker.interval'))
     } catch (e) {
@@ -46,5 +49,6 @@ async function work() {
 }
 
 work()
+console.log('worker started...')
 
 

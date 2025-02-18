@@ -1,0 +1,16 @@
+{
+    "worker": {
+        "io": {
+            "url": "ws://host.docker.internal:3003"
+        },
+        "app": {
+            "url": "http://host.docker.internal:3000"
+        }
+    },
+    "redis": {
+        "connection": {
+            "host": "redis"
+        }
+    }
+
+}
