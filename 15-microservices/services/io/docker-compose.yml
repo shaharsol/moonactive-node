@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  io:
+    container_name: moon-io
+    environment:
+      - NODE_ENV=compose
+    ports:
+      - 3003:3003
+    build: ./
+

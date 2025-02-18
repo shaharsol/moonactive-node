@@ -1,0 +1,39 @@
+{
+    "app": {
+        "port": 3000,
+        "name": "CryptoDashboard",
+        "awsPassword": "",
+        "cookieSecret": "MyCookieSecret",
+        "io": {
+            "url": "ws://localhost:3003"
+        }
+    },
+    "worker": {
+        "interval": 2000,
+        "io": {
+            "url": "ws://localhost:3003"
+        }
+    },
+    "io": {
+        "port": 3003
+    },
+    "mysql": {
+        "host": "127.0.0.1",
+        "port": 3307,
+        "user": "root",
+        "password": "",
+        "database": "cryptoapp" 
+    },
+    "redis": {
+        "symbolKeyTemplate": "company:cryptoapp:symbols",
+        "connection": {
+            "host": "localhost",
+            "port": 6379
+        }
+    },
+    "github": {
+        "clientID" : "Ov23livKNI40aXQhGKYl",
+        "clientSecret": "8650e7bd65319766698f3b377bcd5b7421b2d5e1",
+        "callbackURL": "http://localhost:3000/github/callback"
+    }
+}

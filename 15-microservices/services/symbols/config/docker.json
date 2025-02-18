@@ -1,0 +1,15 @@
+{
+    "mysql": {
+        "host": "host.docker.internal"
+    },
+    "worker": {
+        "io": {
+            "url": "ws://host.docker.internal:3003"
+        }
+    },
+    "redis": {
+        "connection": {
+            "host": "host.docker.internal"
+        }
+    }
+}

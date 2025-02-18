@@ -1,0 +1,16 @@
+{
+    "mysql": {
+        "host": "mysql",
+        "port": 3306
+    },
+    "worker": {
+        "io": {
+            "url": "ws://io:3003"
+        }
+    },
+    "redis": {
+        "connection": {
+            "host": "redis"
+        }
+    }
+}

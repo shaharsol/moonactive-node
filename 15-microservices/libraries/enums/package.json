@@ -1,0 +1,13 @@
+{
+  "name": "socket-messages-moon-shaharsol",
+  "version": "1.0.0",
+  "main": "./dist/socket-messages.js",
+  "types": "./dist/socket-messages.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
