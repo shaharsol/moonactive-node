@@ -25,7 +25,11 @@
         "database": "cryptoapp" 
     },
     "redis": {
-        "symbolKeyTemplate": "company:cryptoapp:symbols"
+        "symbolKeyTemplate": "company:cryptoapp:symbols",
+        "connection": {
+            "host": "localhost",
+            "port": 6379
+        }
     },
     "github": {
         "clientID" : "Ov23livKNI40aXQhGKYl",
