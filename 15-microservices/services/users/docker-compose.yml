@@ -18,11 +18,6 @@ services:
       timeout: 30s
       retries: 5
       start_period: 30s
-  redis:
-    container_name: moon-redis
-    ports:
-      - 6379:6379
-    image: redis:latest
   app:
     container_name: moon-app
     environment:
@@ -35,24 +30,11 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-          
-  worker:
-    container_name: moon-worker
-    environment:
-      - NODE_ENV=compose
-    build:
-      context: ./
-      dockerfile: Dockerfile.worker
-    depends_on:
-      mysql:
-        condition: service_healthy
-  io:
-    container_name: moon-io
-    environment:
-      - NODE_ENV=compose
+  redis:
+    container_name: moon-redis
     ports:
-      - 3003:3003
-    build:
-      context: ./
-      dockerfile: Dockerfile.io
+      - 6379:6379
+    image: redis:latest
+
+          
 

@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import getModel from "../../models/user-symbols/factory";
 import redis from "../../db/redis";
 import config from 'config'
-import SocketMessages from "../../enums/socket-messages";
+import SocketMessages from "socket-messages-moon-shaharsol";
 
 export async function dashboard(req: Request, res: Response, next: NextFunction) {
     try {
