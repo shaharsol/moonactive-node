@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  mysql:
+    container_name: moon-mysql
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+      - MYSQL_DATABASE=cryptoapp
+      - MYSQL_TCP_PORT=3306
+    ports:
+      - 3307:3306
+    build:
+      context: ./
+      dockerfile: Dockerfile.mysql
+  redis:
+    container_name: moon-redis
+    ports:
+      - 6379:6379
+    image: redis:latest
+  app:
+    container_name: moon-app
+    environment:
+      - NODE_ENV=compose
+    ports:
+      - 3000:3000
+    build:
+      context: ./
+      dockerfile: Dockerfile.app
+  worker:
+    container_name: moon-worker
+    environment:
+      - NODE_ENV=compose
+    build:
+      context: ./
+      dockerfile: Dockerfile.worker
+  io:
+    container_name: moon-io
+    environment:
+      - NODE_ENV=compose
+    ports:
+      - 3003:3003
+    build:
+      context: ./
+      dockerfile: Dockerfile.io
+
