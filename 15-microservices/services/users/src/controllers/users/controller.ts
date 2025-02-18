@@ -3,21 +3,22 @@ import getModel from "../../models/user-symbols/factory";
 import redis from "../../db/redis";
 import config from 'config'
 import SocketMessages from "socket-messages-moon-shaharsol";
+import axios from 'axios'
 
 export async function dashboard(req: Request, res: Response, next: NextFunction) {
     try {
         const userId = req.user!.id
         const userSymbols = await getModel().getPerUser(userId)
 
-        const symbolKeyTemplate = config.get<string>('redis.symbolKeyTemplate')
-
-        // TBD fix last after everything works
         // const result = await Promise.all(userSymbols.map(userSymbol => redis.lrange(`${symbolKeyTemplate}:${userSymbol.symbol}`, 0, 0)))
-        const symbolValues = userSymbols.map((userSymbol, index) => ({
-            symbol: userSymbol.symbol,
-            // value: result[index][0] ? JSON.parse(result[index][0]).value : 0
-            value: 0
-        }))
+        const result = await Promise.all(userSymbols.map(userSymbol => axios.get<{value: string}>(`${config.get<string>('worker.api.url')}/api/latest-value/${userSymbol.symbol}`)))
+        const symbolValues = userSymbols.map((userSymbol, index) => {
+            const data = result[index].data
+            return {
+                symbol: userSymbol.symbol,
+                value: data ? data.value : 0
+            }
+        })
 
         res.render('users/dashboard', { 
             userSymbols, 

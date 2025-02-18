@@ -12,6 +12,9 @@
         "interval": 2000,
         "io": {
             "url": "ws://localhost:3003"
+        },
+        "api": {
+            "url": "http://localhost:3005"
         }
     },
     "io": {

@@ -1,0 +1,16 @@
+{
+    "worker": {
+        "api": {
+            "url": "http://host.docker.internal:3005"
+        }
+    },
+    "mysql": {
+        "host": "mysql",
+        "port": 3306
+    },
+    "redis": {
+        "connection": {
+            "host": "redis"
+        }
+    }
+}

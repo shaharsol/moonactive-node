@@ -14,14 +14,14 @@ services:
       dockerfile: Dockerfile.mysql
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-      interval: 1m30s
+      interval: 10s
       timeout: 30s
       retries: 5
       start_period: 30s
   app:
     container_name: moon-app
     environment:
-      - NODE_ENV=compose
+      - NODE_ENV=microservice
     ports:
       - 3000:3000
     build:

@@ -10,4 +10,16 @@ services:
     container_name: moon-worker
     environment:
       - NODE_ENV=microservice
-    build: ./
+    build:
+      context: ./
+      dockerfile: Dockerfile.worker
+
+  app:
+    container_name: moon-worker-api
+    environment:
+      - NODE_ENV=microservice
+    ports:
+      - 3005:3005
+    build:
+      context: ./
+      dockerfile: Dockerfile.app
