@@ -12,6 +12,12 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
   redis:
     container_name: moon-redis
     ports:
@@ -26,6 +32,10 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.app
+    depends_on:
+      mysql:
+        condition: service_healthy
+          
   worker:
     container_name: moon-worker
     environment:
@@ -33,6 +43,9 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.worker
+    depends_on:
+      mysql:
+        condition: service_healthy
   io:
     container_name: moon-io
     environment:
