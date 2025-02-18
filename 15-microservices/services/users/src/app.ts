@@ -11,6 +11,7 @@ import session from 'express-session'
 import guestsRouter from './routers/guests'
 import redis from './db/redis'
 import { RedisStore } from "connect-redis"
+import apiRouter from './routers/api'
 // for config, there are two popular npm solutions
 // dotenv
 // node_config - we will use node_config
@@ -25,6 +26,8 @@ const server = express()
 
 server.set('view engine', 'ejs')
 server.set('views', path.resolve(__dirname, 'views'))
+
+server.use('/api', apiRouter)
 
 // middlewares
 // passport requires 3 things:
